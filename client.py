@@ -18,6 +18,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
 
             if message.lower() == "quit":
                 break
+            
+            if not message.strip():
+                continue
+            
             # Conver the message to bytes data
             # Send all the data to the server
             client_socket.sendall(message.encode("utf-8"))
@@ -30,13 +34,14 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
                 print("[-] Server closed the connection.")
                 break
 
-            # Convert the bytes data to ASCII string
+            # Convert the bytes data to utf-8 string
             # Print the received data
             print("Recevied:", data.decode("utf-8"))
 
     # Handle errors
+    except KeyboardInterrupt:
+        print(f"\n[!] Client exiting...")
     except ConnectionResetError :
         print(f"[!] Server disconnected unexpectedly")
     except Exception as e:
         print(f"[!] An error occurred: {e}")
-
