@@ -1,6 +1,26 @@
 import socket
 import threading
 
+# handle the client thread function
+def handle_client(connection, address):
+    # announce new client connection
+    print(f"[+] New client connected {address}")
+    # send and recive data loop
+    while True:
+        # recive data from client
+        data = connection.recv(1024)
+        if not data:
+            break
+        # print recived data
+        print(f"[{address}] : {data.decode('ascii')}")
+        # send recived data back to client
+        connection.sendall(data)
+    # exit the loop when client disconnects
+    # close the connection
+    connection.close()
+    #announce client disconnection
+    print(f"[-] Client disconnected {address}")
+    
 #                (IP +  Port Number)
 SERVER_ADDRESS = ("127.0.0.1", 50555)
 
@@ -13,13 +33,13 @@ server_socket.bind(SERVER_ADDRESS)
 # the server will keep one user waite if the server busy
 server_socket.listen(1)
 
-# to know when server start for (Debuging)
+# announce server start for (Debuging)
 print(f"Server listening on {SERVER_ADDRESS} ...")
 
 while True:
     # make the server wait for clients to connect (bloking)
     connection, address = server_socket.accept()
-    # main thread
+    # create new thread for the client
     client_thread = threading.Thread(target=handle_client, args=(connection, address))
     # start the thread and go back on the loop again to wait another client
     client_thread.start()
