@@ -1,6 +1,7 @@
 import socket
 import threading
 
+
 # handle the client thread function
 def handle_client(connection, address):
     # announce new client connection
@@ -18,9 +19,10 @@ def handle_client(connection, address):
     # exit the loop when client disconnects
     # close the connection
     connection.close()
-    #announce client disconnection
+    # announce client disconnection
     print(f"[-] Client disconnected {address}")
-    
+
+
 #                (IP +  Port Number)
 SERVER_ADDRESS = ("127.0.0.1", 50555)
 
