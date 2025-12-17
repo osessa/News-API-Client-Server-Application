@@ -19,7 +19,7 @@ print(f"Server listening on {SERVER_ADDRESS} ...")
 while True:
     # make the server wait for clients to connect (bloking)
     connection, address = server_socket.accept()
-
+    # main thread
     client_thread = threading.Thread(target=handle_client, args=(connection, address))
-
+    # start the thread and go back on the loop again to wait another client
     client_thread.start()
