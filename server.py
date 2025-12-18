@@ -4,11 +4,13 @@ import threading
 
 # handle the client thread function
 def handle_client(connection, address):
-    # announce new client connection
-    print(f"[+] New client connected {address}")
-
+   
     # auto close connection by use 'with'
     with connection:
+        client_name = connection.recv(1024).decode('utf-8')
+ 
+        # announce new client connection
+        print(f"[+] New client connected {client_name}")
         try:
             # send and recive data loop
             while True:
@@ -17,18 +19,18 @@ def handle_client(connection, address):
                 if not data:
                     break
                 # print recived data
-                print(f"[{address}] : {data.decode('utf-8')}")
+                print(f"[{client_name}] : {data.decode('utf-8')}")
                 # send recived data back to client
                 connection.sendall(data)
             # exit the loop when client disconnects
 
         except ConnectionResetError:
-            print(f"[!] Client {address} disconnected unexpectedly")
+            print(f"[!] Client {client_name} disconnected unexpectedly")
         except Exception as e:
-            print(f"[!] Error with Client {address}: {e}")
+            print(f"[!] Error with Client {client_name}: {e}")
 
     # announce client disconnection
-    print(f"[-] Client disconnected {address}")
+    print(f"[-] Client disconnected {client_name}")
 
 
 #                (IP +  Port Number)
