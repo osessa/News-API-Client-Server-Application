@@ -4,13 +4,19 @@ import socket
 main_menue = "1) Search headliens \n2) List of sources \n3) Quit"
 search_headliens_menue = "1) Search for keywords \n2) Search by category \n3) Search by Country \n4) List all new headlines \n5) Back to the main menu"
 list_of_sources_menue = "1) Search by category \n2) Search by country \n3) Search by language \n4) List all \n5) Back to the main menu"
+categories_choices = "1) business \n2) general \n3) health \n4) science \n5) sports \n6) technology \n7) Back to menu"
+countries_choices = (
+    "1) au \n2) ca \n3) jp \n4) ae \n5) sa \n6) kr \n7) us \n8) ma \n9) Back to menu"
+)
+languages_choices = "1) ar \n2) en \n3) Back to menu"
+
 
 # Validate the user choice function
 def read_choice(min_val, max_val):
     while True:
         # read user input
         choice = input("> ")
-        
+
         # check if the input is digit, ask again if not
         if not choice.isdigit():
             print(f"Invalid input, choose number {min_val} to {max_val}")
@@ -23,12 +29,13 @@ def read_choice(min_val, max_val):
             print(f"Invalid input, choose number {min_val} to {max_val}")
             continue
 
-        # return choice if it pass all checks 
+        # return choice if it pass all checks
         return choice
 
-# function to display the main menu for the user to chose from 
+
+# function to display the main menu for the user to chose from
 def get_menue():
-    
+
     # loop to take user choice until he choices 3 to exit
     while True:
         # display the menu
@@ -46,14 +53,15 @@ def get_menue():
             get_source_menue()
     return
 
-# function to display the search headliens menue for the user to chose from 
-def get_headliens_menue():
-    # display the  menu
-    print("Choose number from 1 to 5:")
-    print(search_headliens_menue)
 
-    #loop to take user choice until he choices 5 to return to main menu
+# function to display the search headliens menue for the user to chose from
+def get_headliens_menue():
+
+    # loop to take user choice until he choices 5 to return to main menu
     while True:
+        # display the  menu
+        print("Choose number from 1 to 5:")
+        print(search_headliens_menue)
         # read and vailidate user choice
         choice = read_choice(1, 5)
 
@@ -63,20 +71,21 @@ def get_headliens_menue():
         elif choice == 1:
             print("1")
         elif choice == 2:
-            print("2")
+            get_categories_choices()
         elif choice == 3:
-            print("3")
+            get_countries_choices()
         elif choice == 4:
             print("4")
     return
 
-# function to display the list of sources menue  for the user to chose from 
-def get_source_menue():
-    print("Choose number from 1 to 5:")
-    print(list_of_sources_menue)
 
-    #loop to take user choice until he choices 5 to return to main menu
+# function to display the list of sources menue  for the user to chose from
+def get_source_menue():
+
+    # loop to take user choice until he choices 5 to return to main menu
     while True:
+        print("Choose number from 1 to 5:")
+        print(list_of_sources_menue)
         # read and vailidate user choice
         choice = read_choice(1, 5)
 
@@ -84,13 +93,93 @@ def get_source_menue():
         if choice == 5:
             break
         elif choice == 1:
-            print("1")
+            get_categories_choices()
         elif choice == 2:
-            print("2")
+            get_countries_choices()
         elif choice == 3:
-            print("3")
+            get_language_choices()
         elif choice == 4:
             print("4")
+    return
+
+
+# function to display the list of categories choices for the user to chose from
+def get_categories_choices():
+
+    # loop to take user choice until he choices 7 to return back to menu
+    while True:
+        print("Choose number from 1 to 7:")
+        print(categories_choices)
+        # read and vailidate user choice
+        choice = read_choice(1, 7)
+
+        # handle user choice
+        if choice == 1:
+            print("business")
+        elif choice == 2:
+            print("general")
+        elif choice == 3:
+            print("health")
+        elif choice == 4:
+            print("science")
+        elif choice == 5:
+            print("sports")
+        elif choice == 6:
+            print("technology")
+        elif choice == 7:
+            break
+    return
+
+
+# function to display the list of languages choices for the user to chose from
+def get_language_choices():
+
+    # loop to take user choice until he choices 3 to return back to menu
+    while True:
+        print("Choose number from 1 to 3:")
+        print(languages_choices)
+        # read and vailidate user choice
+        choice = read_choice(1, 3)
+
+        # handle user choice
+        if choice == 1:
+            print("ar")
+        elif choice == 2:
+            print("en")
+        elif choice == 3:
+            break
+    return
+
+
+# function to display the list of countries choices for the user to chose from
+def get_countries_choices():
+
+    # loop to take user choice until he choices 9 to return back to menu
+    while True:
+        print("Choose number from 1 to 9:")
+        print(countries_choices)
+        # read and vailidate user choice
+        choice = read_choice(1, 9)
+
+        # handle user choice
+        if choice == 1:
+            print("au")
+        elif choice == 2:
+            print("ca")
+        elif choice == 3:
+            print("jp")
+        elif choice == 4:
+            print("ae")
+        elif choice == 5:
+            print("sa")
+        elif choice == 6:
+            print("kr")
+        elif choice == 7:
+            print("us")
+        elif choice == 8:
+            print("ma")
+        elif choice == 9:
+            break
     return
 
 
