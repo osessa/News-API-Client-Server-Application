@@ -1,100 +1,95 @@
 import socket
 
+# Define the menus
 main_menue = "1) Search headliens \n2) List of sources \n3) Quit"
 search_headliens_menue = "1) Search for keywords \n2) Search by category \n3) Search by Country \n4) List all new headlines \n5) Back to the main menu"
 list_of_sources_menue = "1) Search by category \n2) Search by country \n3) Search by language \n4) List all \n5) Back to the main menu"
 
-
-def get_menue():
-    # while loop take messages from client untill he type "quit"
+# Validate the user choice function
+def read_choice(min_val, max_val):
     while True:
-        print("Choose number from 1 to 3:\n")
+        # read user input
+        choice = input("> ")
+        
+        # check if the input is digit, ask again if not
+        if not choice.isdigit():
+            print(f"Invalid input, choose number {min_val} to {max_val}")
+            continue
+
+        choice = int(choice)
+
+        # check if the input in the range, ask again if not
+        if choice < min_val or choice > max_val:
+            print(f"Invalid input, choose number {min_val} to {max_val}")
+            continue
+
+        # return choice if it pass all checks 
+        return choice
+
+# function to display the main menu for the user to chose from 
+def get_menue():
+    
+    # loop to take user choice until he choices 3 to exit
+    while True:
+        # display the menu
+        print("Choose number from 1 to 3:")
         print(main_menue)
-        message = input("> ")
 
-        if not message.isdigit():
-            print("Invalid input")
-            continue
-        else:
-            message = int(message)
-
-        if not message.is_integer() or message > 3 or message < 1:
-            print("Invalid input")
-            continue
-
-        if message == 3:
+        # read and vailidate user choice
+        choice = read_choice(1, 3)
+        # handle user choice
+        if choice == 3:
             break
-        elif message == 1:
+        elif choice == 1:
             get_headliens_menue()
-        elif message == 2:
+        elif choice == 2:
             get_source_menue()
-
     return
 
-
+# function to display the search headliens menue for the user to chose from 
 def get_headliens_menue():
-    print("Choose number from 1 to 5:\n")
+    # display the  menu
+    print("Choose number from 1 to 5:")
     print(search_headliens_menue)
 
-    # while loop take messages from client untill he type "quit"
+    #loop to take user choice until he choices 5 to return to main menu
     while True:
-        message = input("> ")
+        # read and vailidate user choice
+        choice = read_choice(1, 5)
 
-        if not message.isdigit():
-            print("Invalid input, please choose number from 1 to 5:")
-            print(search_headliens_menue)
-            continue
-        else:
-            message = int(message)
-
-        if not message.is_integer() or message > 5 or message < 1:
-            print("Invalid input, please choose number from 1 to 5:")
-            print(search_headliens_menue)
-            continue
-
-        if message == 5:
+        # handle user choice
+        if choice == 5:
             break
-        elif message == 1:
+        elif choice == 1:
             print("1")
-        elif message == 2:
+        elif choice == 2:
             print("2")
-        elif message == 3:
+        elif choice == 3:
             print("3")
-        elif message == 4:
+        elif choice == 4:
             print("4")
-
     return
 
-
+# function to display the list of sources menue  for the user to chose from 
 def get_source_menue():
-    print("Choose number from 1 to 5:\n")
+    print("Choose number from 1 to 5:")
     print(list_of_sources_menue)
 
-    # while loop take messages from client untill he type "quit"
+    #loop to take user choice until he choices 5 to return to main menu
     while True:
-        message = input("> ")
+        # read and vailidate user choice
+        choice = read_choice(1, 5)
 
-        if not message.isdigit():
-            print("Invalid input, please choose number from 1 to 5:")
-            print(list_of_sources_menue)
-            continue
-        else:
-            message = int(message)
-
-        if not message.is_integer() or message > 5 or message < 1:
-            print("Invalid input, please choose number from 1 to 5:")
-            print(list_of_sources_menue)
-            continue
-
-        if message == 5:
+        # handle user choice
+        if choice == 5:
             break
-        elif message == 1:
+        elif choice == 1:
             print("1")
-        elif message == 2:
+        elif choice == 2:
             print("2")
-        elif message == 3:
+        elif choice == 3:
             print("3")
-        elif message == 4:
+        elif choice == 4:
             print("4")
     return
 
