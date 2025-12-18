@@ -9,8 +9,24 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
     try:
         # Connect to the server (start the three-way handshake)
         client_socket.connect(SERVER_ADDR)
-        user_name = input("Please enter your name: ")
-        client_socket.sendall(user_name.encode("utf-8"))
+
+        # loop to validate the name
+        while True:
+            # take the name
+            client_name = input("Please enter your name: ").strip()
+            if not client_name:
+                print("Name can not be empty.")
+                continue
+
+            client_socket.sendall(client_name.encode("utf-8"))
+            response = client_socket.recv(1024).decode("utf-8")
+
+            # if name are uniqe then we can take it
+            if response == "CLIENTNAME_OK":
+                break
+            # if the client name are reserved; ask for another name
+            else:
+                print("Name is taken, Try another.")
 
         print("Connected to the server type message or type (quit) to exit.")
 

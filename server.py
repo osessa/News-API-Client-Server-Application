@@ -1,18 +1,37 @@
 import socket
 import threading
 
+# set to keep records of the active client names
+active_clients = set()
+# use lock to ensere the thread safety
+lock = threading.Lock()
+
 
 # handle the client thread function
 def handle_client(connection, address):
-   
-    # auto close connection by use 'with'
-    with connection:
-        client_name = connection.recv(1024).decode('utf-8')
- 
-        # announce new client connection
-        print(f"[+] New client connected {client_name}")
-        try:
-            # send and recive data loop
+    client_name = None
+    try:
+        # auto close connection by use 'with'
+        with connection:
+            # <----------- Validate name loop ------------>
+            while True:
+                # reserve client name
+                client_name = connection.recv(1024).decode("utf-8").strip()
+
+                with lock:
+                    # check if client name are reserve in the set or not
+                    if client_name in active_clients:
+                        connection.sendall("CLIENTNAME_TAKEN".encode("utf-8"))
+                        continue
+                    # if not reserved
+                    else:
+                        active_clients.add(client_name)
+                        connection.sendall("CLIENTNAME_OK".encode("utf-8"))
+                        # announce new client connection
+                        print(f"[+] New client connected [{client_name}]")
+                        break
+
+            # <----------- Messages loop ------------>
             while True:
                 # recive data from client
                 data = connection.recv(1024)
@@ -22,15 +41,31 @@ def handle_client(connection, address):
                 print(f"[{client_name}] : {data.decode('utf-8')}")
                 # send recived data back to client
                 connection.sendall(data)
-            # exit the loop when client disconnects
 
-        except ConnectionResetError:
-            print(f"[!] Client {client_name} disconnected unexpectedly")
-        except Exception as e:
-            print(f"[!] Error with Client {client_name}: {e}")
+    except ConnectionResetError:
+        if client_name:
+            print(f"[!] Client [{client_name}] disconnected unexpectedly")
+        # if client did not have name yet then use there address.
+        else:
+            print(f"[!] Client [{address}] disconnected unexpectedly")
 
-    # announce client disconnection
-    print(f"[-] Client disconnected {client_name}")
+    except Exception as e:
+        if client_name:
+            print(f"[!] Error with Client [{client_name}]: {e}")
+        # if client did not have name yet then use there address.
+        else:
+            print(f"[!] Error with Client [{address}]: {e}")
+
+    finally:
+        with lock:
+            active_clients.discard(client_name)
+            # announce client disconnection
+            if client_name:
+                print(f"[-] Client disconnected [{client_name}]")
+
+            # if client did not have name yet then use there address.
+            else:
+                print(f"[-] Client disconnected [{address}]")
 
 
 #                (IP +  Port Number)
