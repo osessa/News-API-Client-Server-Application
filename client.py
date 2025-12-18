@@ -1,9 +1,9 @@
 import socket
 
 # Define the menus
-main_menue = "1) Search headliens \n2) List of sources \n3) Quit"
-search_headliens_menue = "1) Search for keywords \n2) Search by category \n3) Search by Country \n4) List all new headlines \n5) Back to the main menu"
-list_of_sources_menue = "1) Search by category \n2) Search by country \n3) Search by language \n4) List all \n5) Back to the main menu"
+main_menu = "1) Search headliens \n2) List of sources \n3) Quit"
+search_headliens_menu = "1) Search for keywords \n2) Search by category \n3) Search by Country \n4) List all new headlines \n5) Back to the main menu"
+list_of_sources_menu = "1) Search by category \n2) Search by country \n3) Search by language \n4) List all \n5) Back to the main menu"
 categories_choices = "1) business \n2) general \n3) health \n4) science \n5) sports \n6) technology \n7) Back to menu"
 countries_choices = (
     "1) au \n2) ca \n3) jp \n4) ae \n5) sa \n6) kr \n7) us \n8) ma \n9) Back to menu"
@@ -34,13 +34,13 @@ def read_choice(min_val, max_val):
 
 
 # function to display the main menu for the user to chose from
-def get_menue():
+def get_menu():
 
     # loop to take user choice until he choices 3 to exit
     while True:
         # display the menu
         print("Choose number from 1 to 3:")
-        print(main_menue)
+        print(main_menu)
 
         # read and vailidate user choice
         choice = read_choice(1, 3)
@@ -48,20 +48,20 @@ def get_menue():
         if choice == 3:
             break
         elif choice == 1:
-            get_headliens_menue()
+            get_headliens_menu()
         elif choice == 2:
-            get_source_menue()
+            get_source_menu()
     return
 
 
-# function to display the search headliens menue for the user to chose from
-def get_headliens_menue():
+# function to display the search headliens menu for the user to chose from
+def get_headliens_menu():
 
     # loop to take user choice until he choices 5 to return to main menu
     while True:
         # display the  menu
         print("Choose number from 1 to 5:")
-        print(search_headliens_menue)
+        print(search_headliens_menu)
         # read and vailidate user choice
         choice = read_choice(1, 5)
 
@@ -82,13 +82,13 @@ def get_headliens_menue():
     return
 
 
-# function to display the list of sources menue  for the user to chose from
-def get_source_menue():
+# function to display the list of sources menu  for the user to chose from
+def get_source_menu():
 
     # loop to take user choice until he choices 5 to return to main menu
     while True:
         print("Choose number from 1 to 5:")
-        print(list_of_sources_menue)
+        print(list_of_sources_menu)
         # read and vailidate user choice
         choice = read_choice(1, 5)
 
@@ -189,8 +189,8 @@ def get_countries_choices():
     return
 
 
-def send_to_server(menue_name, data):
-    query = menue_name + " " + data
+def send_to_server(menu_name, data):
+    query = menu_name + " " + data
     client_socket.sendall(query.encode("utf-8"))
     print(client_socket.recv(1024).decode("utf-8"))
 
@@ -223,7 +223,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
             else:
                 print("Name is taken, Try another.")
 
-        get_menue()
+        get_menu()
 
         # # Conver the message to bytes data
         # # Send all the data to the server
