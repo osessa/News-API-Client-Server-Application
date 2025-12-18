@@ -69,13 +69,16 @@ def get_headliens_menue():
         if choice == 5:
             break
         elif choice == 1:
-            print("1")
+            requst = input("write the key word: ").strip()
+            send_to_server("headliens", requst)
         elif choice == 2:
-            get_categories_choices()
+            requst = get_categories_choices()
+            send_to_server("headliens", requst)
         elif choice == 3:
-            get_countries_choices()
+            requst = get_countries_choices()
+            send_to_server("headliens", requst)
         elif choice == 4:
-            print("4")
+            send_to_server("headliens", "List all new headlines")
     return
 
 
@@ -93,13 +96,16 @@ def get_source_menue():
         if choice == 5:
             break
         elif choice == 1:
-            get_categories_choices()
+            requst = get_categories_choices()
+            send_to_server("source", requst)
         elif choice == 2:
-            get_countries_choices()
+            requst = get_countries_choices()
+            send_to_server("source", requst)
         elif choice == 3:
-            get_language_choices()
+            requst = get_language_choices()
+            send_to_server("source", requst)
         elif choice == 4:
-            print("4")
+            send_to_server("source", "list all")
     return
 
 
@@ -115,17 +121,17 @@ def get_categories_choices():
 
         # handle user choice
         if choice == 1:
-            print("business")
+            return "business"
         elif choice == 2:
-            print("general")
+            return "general"
         elif choice == 3:
-            print("health")
+            return "health"
         elif choice == 4:
-            print("science")
+            return "science"
         elif choice == 5:
-            print("sports")
+            return "sports"
         elif choice == 6:
-            print("technology")
+            return "technology"
         elif choice == 7:
             break
     return
@@ -143,9 +149,9 @@ def get_language_choices():
 
         # handle user choice
         if choice == 1:
-            print("ar")
+            return "ar"
         elif choice == 2:
-            print("en")
+            return "en"
         elif choice == 3:
             break
     return
@@ -163,24 +169,30 @@ def get_countries_choices():
 
         # handle user choice
         if choice == 1:
-            print("au")
+            return "au"
         elif choice == 2:
-            print("ca")
+            return "ca"
         elif choice == 3:
-            print("jp")
+            return "jp"
         elif choice == 4:
-            print("ae")
+            return "ae"
         elif choice == 5:
-            print("sa")
+            return "sa"
         elif choice == 6:
-            print("kr")
+            return "kr"
         elif choice == 7:
-            print("us")
+            return "us"
         elif choice == 8:
-            print("ma")
+            return "ma"
         elif choice == 9:
             break
     return
+
+
+def send_to_server(menue_name, data):
+    query = menue_name + " " + data
+    client_socket.sendall(query.encode("utf-8"))
+    print(client_socket.recv(1024).decode("utf-8"))
 
 
 # Server IP address and Port number
