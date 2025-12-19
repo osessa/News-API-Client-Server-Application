@@ -2,10 +2,9 @@ import socket
 import threading
 import requests
 import json
-from config import NEWS_API_KEY
+from config import NEWS_API_KEY, host, port, group_id, BASE_URL
 import os  # not bult in
 
-group_id = "GB7"
 # set to keep records of the active client names
 active_clients = set()
 # use lock to ensere the thread safety
@@ -147,9 +146,9 @@ def handle_client(connection, address):
                 )
 
                 if "?" in client_query:
-                    url = f"https://newsapi.org/v2/{client_query}&apiKey={NEWS_API_KEY}"
+                    url = f"{BASE_URL}{client_query}&apiKey={NEWS_API_KEY}"
                 else:
-                    url = f"https://newsapi.org/v2/{client_query}?apiKey={NEWS_API_KEY}"
+                    url = f"{BASE_URL}{client_query}?apiKey={NEWS_API_KEY}"
 
                 if client_query_type == "headlines":
                     newsAPIresponse = list_details_headlines(url, connection)
@@ -186,8 +185,8 @@ def handle_client(connection, address):
                 print(f"[-] Client disconnected [{address}]")
 
 
-#                (IP +  Port Number)
-SERVER_ADDRESS = ("127.0.0.1", 50555)
+#                (IP + Port Number)
+SERVER_ADDRESS = (host, port)
 
 # create the socket and this socket have ("AF_INET": Address Family Internet = IPv4, TCP "SOCK_STREAM")
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
