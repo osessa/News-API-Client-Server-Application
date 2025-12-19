@@ -117,6 +117,8 @@ def handle_client(connection, address):
                 if not client_query:
                     break
 
+                print(f"[{client_name}] request type: {client_query_type}, request parameter: {client_query}.")
+
                 if "?" in client_query:
                     url = f"https://newsapi.org/v2/{client_query}&apiKey={NEWS_API_KEY}"
                 else:
