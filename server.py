@@ -10,6 +10,44 @@ active_clients = set()
 lock = threading.Lock()
 
 
+def list_details_headlines(url, query_type):
+    response = requests.get(url)
+    json_result = response.json()
+    articales = json_result.get("articles", [])
+    output = []
+    num_of_articales = 1
+    for articale in articales[:15]:
+        source = articale.get("source", {}).get("name", "N/A")
+        author = articale.get("author", "N/A")
+        title = articale.get("title", "N/A")
+
+        output.append(
+            f"{num_of_articales}\nSource:{source}\nAuthor:{author}\nTitle:{title}\n"
+        )
+        num_of_articales += 1
+    
+    if not output:
+        output.append("No results found.")
+    connection.sendall("\n".join(output).encode("utf-8"))
+
+def list_details_sources(url, query_type):
+    response = requests.get(url)
+    json_result = response.json()
+    sources = json_result.get("sources", [])
+    output = []
+    num_of_sources = 1
+    for source in sources[:15]:
+        source = source.get("name", "N/A")
+       
+        output.append(
+            f"{num_of_sources}\nSource:{source}\n"
+        )
+        num_of_sources += 1
+    
+    if not output:
+        output.append("No results found.")
+    connection.sendall("\n".join(output).encode("utf-8"))
+
 # handle the client thread function
 def handle_client(connection, address):
     client_name = None
@@ -37,7 +75,12 @@ def handle_client(connection, address):
             # <----------- Messages loop ------------>
             while True:
                 # recive data from client
-                client_query = connection.recv(1024).decode("utf-8").strip()
+                client_request_dic = connection.recv(1024).decode("utf-8").strip()
+                client_request_dic=json.loads(client_request_dic)
+                # extract data
+                client_query = client_request_dic["query"]
+                client_query_type = client_request_dic["type"]
+
                 if not client_query:
                     break
 
@@ -46,10 +89,10 @@ def handle_client(connection, address):
                 else:
                     url = f"https://newsapi.org/v2/{client_query}?apiKey={NEWS_API_KEY}"
 
-                response = requests.get(url)
-                json_result = response.json()
-                json_string = json.dumps(json_result)
-                connection.sendall(json_string.encode("utf-8"))
+                if client_query_type=="headlines":
+                    list_details_headlines(url,client_query_type)
+                elif client_query_type=="sources":
+                    list_details_sources(url, client_query_type)
 
     except ConnectionResetError:
         if client_name:

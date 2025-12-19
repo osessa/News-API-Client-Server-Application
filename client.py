@@ -1,5 +1,5 @@
 import socket
-
+import json
 # Define the menus
 main_menu = "1) Search headliens \n2) List of sources \n3) Quit"
 search_headliens_menu = "1) Search for keywords \n2) Search by category \n3) Search by Country \n4) List all new headlines \n5) Back to the main menu"
@@ -73,22 +73,22 @@ def get_headliens_menu():
             if not requst:
                 continue
             query = f"top-headlines?q={requst}"
-            send_to_server(query)
+            send_to_server(query,"headlines")
         elif choice == 2:
             requst = get_categories_choices()
             if requst is None:
                 continue
             query = f"top-headlines?category={requst}"
-            send_to_server(query)
+            send_to_server(query,"headlines")
         elif choice == 3:
             requst = get_countries_choices()
             if requst is None:
                 continue
             query = f"top-headlines?country={requst}"
-            send_to_server(query)
+            send_to_server(query,"headlines")
         elif choice == 4:
             query = "top-headlines?category=general"
-            send_to_server(query)
+            send_to_server(query,"headlines")
     return
 
 
@@ -110,22 +110,22 @@ def get_source_menu():
             if requst is None:
                 continue
             query = f"sources?category={requst}"
-            send_to_server(query)
+            send_to_server(query,"sources")
         elif choice == 2:
             requst = get_countries_choices()
             if requst is None:
                 continue
             query = f"sources?country={requst}"
-            send_to_server(query)
+            send_to_server(query,"sources")
         elif choice == 3:
             requst = get_language_choices()
             if requst is None:
                 continue
             query = f"sources?language={requst}"
-            send_to_server(query)
+            send_to_server(query,"sources")
         elif choice == 4:
             query = f"sources"
-            send_to_server(query)
+            send_to_server(query,"sources")
     return
 
 
@@ -209,8 +209,10 @@ def get_countries_choices():
     return
 
 
-def send_to_server(query):
-    client_socket.sendall(query.encode("utf-8"))
+def send_to_server(query,type):
+    request_dic = {"type": type , "query":query}
+    payLoad = json.dumps(request_dic)
+    client_socket.sendall(payLoad.encode("utf-8"))
     print(client_socket.recv(50000).decode("utf-8"))
 
 
