@@ -17,7 +17,7 @@ def list_details_headlines(url, connection):
     results = []
 
     count=0
-    for  article in articales[:15]:
+    for  i,article in enumerate (articales[:15],start=1):
         count+=1
         results.append(
             {
@@ -50,12 +50,26 @@ def list_details_sources(url, connection):
     json_result = response.json()
     sources = json_result.get("sources", [])
     results = []
-
+    count=0
     for i, source in enumerate(sources[:15], start=1):
+        count+=1
         results.append({"id": i, "name": source.get("name", "N/A")})
 
     payload = json.dumps(results)
     connection.sendall(payload.encode("utf-8"))
+    
+    if count==0:
+        return
+    
+    chosen_articale_id = connection.recv(1024).decode("utf-8").strip()
+
+    chosen_articale_id=int(chosen_articale_id)
+
+    chosen_articale = sources[chosen_articale_id - 1]
+
+    chosen_articale_details=f"Source name : {chosen_articale.get('name', 'N/A')}\nDescription: {chosen_articale.get('description', 'N/A')}\nURL: {chosen_articale.get('url', 'N/A')}\n\nCountry: {chosen_articale.get('country', 'N/A')}\n\Language: {chosen_articale.get('language', 'N/A')}\nCategory: {chosen_articale.get('category', 'N/A')}\n"
+
+    connection.sendall(chosen_articale_details.encode("utf-8"))
 
 
 # handle the client thread function

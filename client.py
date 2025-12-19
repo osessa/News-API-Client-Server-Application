@@ -230,10 +230,6 @@ def send_to_server(query,type):
  
     list_details_len = len(list_details)
 
-    #check if there is result
-    if list_details_len == 0:
-        print("No results found.\n")
-        return
     
     count=1
     for articale in list_details:
@@ -244,6 +240,9 @@ def send_to_server(query,type):
         print(f"{count}\nSource:{source}\nAuthor:{author}\nTitle:{title}\n")
         count += 1
     
+    if count==0:
+        print("No results found.\n")
+        return
     #ask user to select iteam for more details and validate thier choose
     print(f"Please select itam from 1 to {list_details_len}")
     chosse = read_choice(1,list_details_len)
