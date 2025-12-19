@@ -10,43 +10,38 @@ active_clients = set()
 lock = threading.Lock()
 
 
-def list_details_headlines(url, query_type):
+def list_details_headlines(url, connection):
     response = requests.get(url)
     json_result = response.json()
     articales = json_result.get("articles", [])
-    output = []
-    num_of_articales = 1
-    for articale in articales[:15]:
-        source = articale.get("source", {}).get("name", "N/A")
-        author = articale.get("author", "N/A")
-        title = articale.get("title", "N/A")
+    results = []
 
-        output.append(
-            f"{num_of_articales}\nSource:{source}\nAuthor:{author}\nTitle:{title}\n"
+    for i, article in enumerate(articales[:15], start=1):
+        results.append(
+            {
+                "id": i,
+                "source": article.get("source", {}).get("name", "N/A"),
+                "author": article.get("author", "N/A"),
+                "title": article.get("title", "N/A"),
+            }
         )
-        num_of_articales += 1
-    
-    if not output:
-        output.append("No results found.")
-    connection.sendall("\n".join(output).encode("utf-8"))
 
-def list_details_sources(url, query_type):
+    payload = json.dumps(results)
+    connection.sendall(payload.encode("utf-8"))
+
+
+def list_details_sources(url, connection):
     response = requests.get(url)
     json_result = response.json()
     sources = json_result.get("sources", [])
-    output = []
-    num_of_sources = 1
-    for source in sources[:15]:
-        source = source.get("name", "N/A")
-       
-        output.append(
-            f"{num_of_sources}\nSource:{source}\n"
-        )
-        num_of_sources += 1
-    
-    if not output:
-        output.append("No results found.")
-    connection.sendall("\n".join(output).encode("utf-8"))
+    results = []
+
+    for i, source in enumerate(sources[:15], start=1):
+        results.append({"id": i, "name": source.get("name", "N/A")})
+
+    payload = json.dumps(results)
+    connection.sendall(payload.encode("utf-8"))
+
 
 # handle the client thread function
 def handle_client(connection, address):
@@ -75,8 +70,17 @@ def handle_client(connection, address):
             # <----------- Messages loop ------------>
             while True:
                 # recive data from client
-                client_request_dic = connection.recv(1024).decode("utf-8").strip()
-                client_request_dic=json.loads(client_request_dic)
+                client_request_dic = connection.recv(1024)
+
+                if not client_request_dic:
+                    break
+
+                client_request_dic = client_request_dic.decode("utf-8").strip()
+
+                if not client_request_dic:
+                    break
+
+                client_request_dic = json.loads(client_request_dic)
                 # extract data
                 client_query = client_request_dic["query"]
                 client_query_type = client_request_dic["type"]
@@ -89,10 +93,10 @@ def handle_client(connection, address):
                 else:
                     url = f"https://newsapi.org/v2/{client_query}?apiKey={NEWS_API_KEY}"
 
-                if client_query_type=="headlines":
-                    list_details_headlines(url,client_query_type)
-                elif client_query_type=="sources":
-                    list_details_sources(url, client_query_type)
+                if client_query_type == "headlines":
+                    list_details_headlines(url, connection)
+                elif client_query_type == "sources":
+                    list_details_sources(url, connection)
 
     except ConnectionResetError:
         if client_name:
