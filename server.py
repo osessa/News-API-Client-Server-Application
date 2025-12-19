@@ -67,7 +67,7 @@ def list_details_sources(url, connection):
 
     chosen_articale = sources[chosen_articale_id - 1]
 
-    chosen_articale_details=f"Source name : {chosen_articale.get('name', 'N/A')}\nDescription: {chosen_articale.get('description', 'N/A')}\nURL: {chosen_articale.get('url', 'N/A')}\n\nCountry: {chosen_articale.get('country', 'N/A')}\n\Language: {chosen_articale.get('language', 'N/A')}\nCategory: {chosen_articale.get('category', 'N/A')}\n"
+    chosen_articale_details=f"Source name : {chosen_articale.get('name', 'N/A')}\nDescription: {chosen_articale.get('description', 'N/A')}\nURL: {chosen_articale.get('url', 'N/A')}\nCountry: {chosen_articale.get('country', 'N/A')}\nLanguage: {chosen_articale.get('language', 'N/A')}\nCategory: {chosen_articale.get('category', 'N/A')}\n"
 
     connection.sendall(chosen_articale_details.encode("utf-8"))
 
