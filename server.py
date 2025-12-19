@@ -1,7 +1,9 @@
 import socket
 import threading
 import requests
+import json
 from config import NEWS_API_KEY
+
 # set to keep records of the active client names
 active_clients = set()
 # use lock to ensere the thread safety
@@ -35,7 +37,7 @@ def handle_client(connection, address):
             # <----------- Messages loop ------------>
             while True:
                 # recive data from client
-                client_query = connection.recv(1024).decode('utf-8').strip()
+                client_query = connection.recv(1024).decode("utf-8").strip()
                 if not client_query:
                     break
 
@@ -43,10 +45,11 @@ def handle_client(connection, address):
                     url = f"https://newsapi.org/v2/{client_query}&apiKey={NEWS_API_KEY}"
                 else:
                     url = f"https://newsapi.org/v2/{client_query}?apiKey={NEWS_API_KEY}"
-                
-                response=requests.get(url)
-    
-                connection.sendall(response.encode('utf-8'))
+
+                response = requests.get(url)
+                json_result = response.json()
+                json_string = json.dumps(json_result)
+                connection.sendall(json_string.encode("utf-8"))
 
     except ConnectionResetError:
         if client_name:
