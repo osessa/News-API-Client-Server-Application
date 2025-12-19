@@ -3,7 +3,9 @@ import threading
 import requests
 import json
 from config import NEWS_API_KEY
+import os  # not bult in
 
+group_id = "GB7"
 # set to keep records of the active client names
 active_clients = set()
 # use lock to ensere the thread safety
@@ -16,9 +18,9 @@ def list_details_headlines(url, connection):
     articales = json_result.get("articles", [])
     results = []
 
-    count=0
-    for  i,article in enumerate (articales[:15],start=1):
-        count+=1
+    count = 0
+    for i, article in enumerate(articales[:15], start=1):
+        count += 1
         results.append(
             {
                 "id": count,
@@ -31,18 +33,19 @@ def list_details_headlines(url, connection):
     payload = json.dumps(results)
     connection.sendall(payload.encode("utf-8"))
 
-    if count==0:
-        return
-    
+    if count == 0:
+        return json_result
+
     chosen_articale_id = connection.recv(1024).decode("utf-8").strip()
 
-    chosen_articale_id=int(chosen_articale_id)
+    chosen_articale_id = int(chosen_articale_id)
 
     chosen_articale = articales[chosen_articale_id - 1]
 
-    chosen_articale_details=f"Source name : {chosen_articale.get('source', {}).get('name', 'N/A')}\nAuthor: {chosen_articale.get('author', 'N/A')}\nTitle: {chosen_articale.get('title', 'N/A')}\nDescription: {chosen_articale.get('description', 'N/A')}\nURL: {chosen_articale.get('url', 'N/A')}\nPublished Data & Time: {chosen_articale.get('publishedAt', 'N/A')}\n"
+    chosen_articale_details = f"Source name : {chosen_articale.get('source', {}).get('name', 'N/A')}\nAuthor: {chosen_articale.get('author', 'N/A')}\nTitle: {chosen_articale.get('title', 'N/A')}\nDescription: {chosen_articale.get('description', 'N/A')}\nURL: {chosen_articale.get('url', 'N/A')}\nPublished Data & Time: {chosen_articale.get('publishedAt', 'N/A')}\n"
 
     connection.sendall(chosen_articale_details.encode("utf-8"))
+    return json_result
 
 
 def list_details_sources(url, connection):
@@ -50,26 +53,48 @@ def list_details_sources(url, connection):
     json_result = response.json()
     sources = json_result.get("sources", [])
     results = []
-    count=0
+    count = 0
     for i, source in enumerate(sources[:15], start=1):
-        count+=1
+        count += 1
         results.append({"id": i, "name": source.get("name", "N/A")})
 
     payload = json.dumps(results)
     connection.sendall(payload.encode("utf-8"))
-    
-    if count==0:
-        return
-    
+
+    if count == 0:
+        return json_result
+
     chosen_articale_id = connection.recv(1024).decode("utf-8").strip()
 
-    chosen_articale_id=int(chosen_articale_id)
+    chosen_articale_id = int(chosen_articale_id)
 
     chosen_articale = sources[chosen_articale_id - 1]
 
-    chosen_articale_details=f"Source name : {chosen_articale.get('name', 'N/A')}\nDescription: {chosen_articale.get('description', 'N/A')}\nURL: {chosen_articale.get('url', 'N/A')}\nCountry: {chosen_articale.get('country', 'N/A')}\nLanguage: {chosen_articale.get('language', 'N/A')}\nCategory: {chosen_articale.get('category', 'N/A')}\n"
+    chosen_articale_details = f"Source name : {chosen_articale.get('name', 'N/A')}\nDescription: {chosen_articale.get('description', 'N/A')}\nURL: {chosen_articale.get('url', 'N/A')}\nCountry: {chosen_articale.get('country', 'N/A')}\nLanguage: {chosen_articale.get('language', 'N/A')}\nCategory: {chosen_articale.get('category', 'N/A')}\n"
 
     connection.sendall(chosen_articale_details.encode("utf-8"))
+    return json_result
+
+
+def add_request_record(client_name, client_query_type, group_id, response):
+    file_name = f"{client_name}_{client_query_type}_{group_id}.json"
+
+    existing_data = []
+
+    if os.path.exists(file_name):
+        with open(file_name, "r", encoding="utf-8") as file:
+            try:
+                existing_data = json.load(file)
+            except json.JSONDecodeError:
+                existing_data = []
+
+    if not isinstance(existing_data, list):
+        existing_data = [existing_data]
+
+    existing_data.append(response)
+
+    with open(file_name, "w", encoding="utf-8") as file:
+        json.dump(existing_data, file, indent=4, ensure_ascii=False)
 
 
 # handle the client thread function
@@ -117,7 +142,9 @@ def handle_client(connection, address):
                 if not client_query:
                     break
 
-                print(f"[{client_name}] request type: {client_query_type}, request parameter: {client_query}.")
+                print(
+                    f"[{client_name}] request type: {client_query_type}, request parameter: {client_query}."
+                )
 
                 if "?" in client_query:
                     url = f"https://newsapi.org/v2/{client_query}&apiKey={NEWS_API_KEY}"
@@ -125,9 +152,13 @@ def handle_client(connection, address):
                     url = f"https://newsapi.org/v2/{client_query}?apiKey={NEWS_API_KEY}"
 
                 if client_query_type == "headlines":
-                    list_details_headlines(url, connection)
+                    newsAPIresponse = list_details_headlines(url, connection)
                 elif client_query_type == "sources":
-                    list_details_sources(url, connection)
+                    newsAPIresponse = list_details_sources(url, connection)
+
+                add_request_record(
+                    client_name, client_query_type, group_id, newsAPIresponse
+                )
 
     except ConnectionResetError:
         if client_name:

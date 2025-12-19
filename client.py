@@ -1,5 +1,6 @@
 import socket
 import json
+
 # Define the menus
 main_menu = "1) Search headliens \n2) List of sources \n3) Quit"
 search_headliens_menu = "1) Search for keywords \n2) Search by category \n3) Search by Country \n4) List all new headlines \n5) Back to the main menu"
@@ -73,22 +74,22 @@ def get_headliens_menu():
             if not requst:
                 continue
             query = f"top-headlines?q={requst}"
-            send_to_server(query,"headlines")
+            send_to_server(query, "headlines")
         elif choice == 2:
             requst = get_categories_choices()
             if requst is None:
                 continue
             query = f"top-headlines?category={requst}"
-            send_to_server(query,"headlines")
+            send_to_server(query, "headlines")
         elif choice == 3:
             requst = get_countries_choices()
             if requst is None:
                 continue
             query = f"top-headlines?country={requst}"
-            send_to_server(query,"headlines")
+            send_to_server(query, "headlines")
         elif choice == 4:
             query = "top-headlines?category=general"
-            send_to_server(query,"headlines")
+            send_to_server(query, "headlines")
     return
 
 
@@ -110,22 +111,22 @@ def get_source_menu():
             if requst is None:
                 continue
             query = f"sources?category={requst}"
-            send_to_server(query,"sources")
+            send_to_server(query, "sources")
         elif choice == 2:
             requst = get_countries_choices()
             if requst is None:
                 continue
             query = f"sources?country={requst}"
-            send_to_server(query,"sources")
+            send_to_server(query, "sources")
         elif choice == 3:
             requst = get_language_choices()
             if requst is None:
                 continue
             query = f"sources?language={requst}"
-            send_to_server(query,"sources")
+            send_to_server(query, "sources")
         elif choice == 4:
             query = f"sources"
-            send_to_server(query,"sources")
+            send_to_server(query, "sources")
     return
 
 
@@ -209,12 +210,12 @@ def get_countries_choices():
     return
 
 
-def send_to_server(query,type):
-    request_dic = {"type": type , "query":query}
+def send_to_server(query, type):
+    request_dic = {"type": type, "query": query}
     payLoad = json.dumps(request_dic)
     client_socket.sendall(payLoad.encode("utf-8"))
 
-    if type=="headlines":
+    if type == "headlines":
         response = client_socket.recv(90000)
 
         if not response:
@@ -228,37 +229,36 @@ def send_to_server(query,type):
             return
 
         list_details = json.loads(list_details)
-    
+
         list_details_len = len(list_details)
 
-        
-        count=1
+        count = 1
         for articale in list_details:
             source = articale.get("source", "N/A")
             author = articale.get("author", "N/A")
-            title  = articale.get("title", "N/A")
+            title = articale.get("title", "N/A")
 
             print(f"{count}\nSource:{source}\nAuthor:{author}\nTitle:{title}\n")
             count += 1
-        
-        if count==1:
+
+        if count == 1:
             print("No results found.\n")
             return
-        
-        #ask user to select iteam for more details and validate thier choose
+
+        # ask user to select iteam for more details and validate thier choose
         print(f"Please select itam from 1 to {list_details_len}")
-        chosse = read_choice(1,list_details_len)
-        
-        #send id of choosen iteam
+        chosse = read_choice(1, list_details_len)
+
+        # send id of choosen iteam
         client_socket.sendall(str(chosse).encode("utf-8"))
 
-        #recive 'string' details about choosen iteam and print it
+        # recive 'string' details about choosen iteam and print it
         chosen_articale_details = client_socket.recv(90000).decode("utf-8")
-        print(chosen_articale_details+'\n')
+        print(chosen_articale_details + "\n")
 
         return
 
-    if type=="sources":
+    if type == "sources":
         response = client_socket.recv(90000)
 
         if not response:
@@ -272,39 +272,31 @@ def send_to_server(query,type):
             return
 
         list_details = json.loads(list_details)
-    
+
         list_details_len = len(list_details)
 
-        
-        count=1
+        count = 1
         for articale in list_details:
             source = articale.get("name", "N/A")
-            
 
             print(f"{count}\nSource name:{source}\n")
             count += 1
-        
-        if count==1:
+
+        if count == 1:
             print("No results found.\n")
             return
-        #ask user to select iteam for more details and validate thier choose
+        # ask user to select iteam for more details and validate thier choose
         print(f"Please select itam from 1 to {list_details_len}")
-        chosse = read_choice(1,list_details_len)
-        
-        #send id of choosen iteam
+        chosse = read_choice(1, list_details_len)
+
+        # send id of choosen iteam
         client_socket.sendall(str(chosse).encode("utf-8"))
 
-        #recive 'string' details about choosen iteam and print it
+        # recive 'string' details about choosen iteam and print it
         chosen_articale_details = client_socket.recv(90000).decode("utf-8")
-        print(chosen_articale_details+'\n')
+        print(chosen_articale_details + "\n")
 
         return
-
-
-
-
-
-
 
 
 # Server IP address and Port number
