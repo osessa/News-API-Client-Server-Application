@@ -70,15 +70,19 @@ def get_headliens_menu():
             break
         elif choice == 1:
             requst = input("write the key word: ").strip()
-            send_to_server("headliens", requst)
+            query = f"top-headlines?q={requst}"
+            send_to_server(query)
         elif choice == 2:
             requst = get_categories_choices()
-            send_to_server("headliens", requst)
+            query = f"top-headlines?category={requst}"
+            send_to_server(query)
         elif choice == 3:
             requst = get_countries_choices()
-            send_to_server("headliens", requst)
+            query = f"top-headlines?country={requst}"
+            send_to_server(query)
         elif choice == 4:
-            send_to_server("headliens", "List all new headlines")
+            query = f"top-headlines"
+            send_to_server(query)
     return
 
 
@@ -97,15 +101,19 @@ def get_source_menu():
             break
         elif choice == 1:
             requst = get_categories_choices()
-            send_to_server("source", requst)
+            query = f"sources?category={requst}"
+            send_to_server(query)
         elif choice == 2:
             requst = get_countries_choices()
-            send_to_server("source", requst)
+            query = f"sources?country={requst}"
+            send_to_server(query)
         elif choice == 3:
             requst = get_language_choices()
-            send_to_server("source", requst)
+            query = f"sources?language={requst}"
+            send_to_server(query)
         elif choice == 4:
-            send_to_server("source", "list all")
+            query = f"sources"
+            send_to_server(query)
     return
 
 
@@ -189,8 +197,7 @@ def get_countries_choices():
     return
 
 
-def send_to_server(menu_name, data):
-    query = menu_name + " " + data
+def send_to_server(query):
     client_socket.sendall(query.encode("utf-8"))
     print(client_socket.recv(1024).decode("utf-8"))
 
