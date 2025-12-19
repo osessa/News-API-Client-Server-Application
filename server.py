@@ -16,10 +16,12 @@ def list_details_headlines(url, connection):
     articales = json_result.get("articles", [])
     results = []
 
-    for i, article in enumerate(articales[:15], start=1):
+    count=0
+    for  article in articales[:15]:
+        count+=1
         results.append(
             {
-                "id": i,
+                "id": count,
                 "source": article.get("source", {}).get("name", "N/A"),
                 "author": article.get("author", "N/A"),
                 "title": article.get("title", "N/A"),
@@ -28,6 +30,19 @@ def list_details_headlines(url, connection):
 
     payload = json.dumps(results)
     connection.sendall(payload.encode("utf-8"))
+
+    if count==0:
+        return
+    
+    chosen_articale_id = connection.recv(1024).decode("utf-8").strip()
+
+    chosen_articale_id=int(chosen_articale_id)
+
+    chosen_articale = articales[chosen_articale_id - 1]
+
+    chosen_articale_details=f"Source name : {chosen_articale.get('source', {}).get('name', 'N/A')}\nAuthor: {chosen_articale.get('author', 'N/A')}\nTitle: {chosen_articale.get('title', 'N/A')}\nDescription: {chosen_articale.get('description', 'N/A')}\nURL: {chosen_articale.get('url', 'N/A')}\nPublished Data & Time: {chosen_articale.get('publishedAt', 'N/A')}\n"
+
+    connection.sendall(chosen_articale_details.encode("utf-8"))
 
 
 def list_details_sources(url, connection):

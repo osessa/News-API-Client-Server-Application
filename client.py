@@ -213,7 +213,55 @@ def send_to_server(query,type):
     request_dic = {"type": type , "query":query}
     payLoad = json.dumps(request_dic)
     client_socket.sendall(payLoad.encode("utf-8"))
-    print(client_socket.recv(50000).decode("utf-8"))
+
+    response = client_socket.recv(90000)
+
+    if not response:
+        print("No results found.\n")
+        return
+
+    list_details = response.decode("utf-8").strip()
+
+    if not list_details:
+        print("No results found.\n")
+        return
+
+    list_details = json.loads(list_details)
+ 
+    list_details_len = len(list_details)
+
+    #check if there is result
+    if list_details_len == 0:
+        print("No results found.\n")
+        return
+    
+    count=1
+    for articale in list_details:
+        source = articale.get("source", "N/A")
+        author = articale.get("author", "N/A")
+        title  = articale.get("title", "N/A")
+
+        print(f"{count}\nSource:{source}\nAuthor:{author}\nTitle:{title}\n")
+        count += 1
+    
+    #ask user to select iteam for more details and validate thier choose
+    print(f"Please select itam from 1 to {list_details_len}")
+    chosse = read_choice(1,list_details_len)
+    
+    #send id of choosen iteam
+    client_socket.sendall(str(chosse).encode("utf-8"))
+
+    #recive 'string' details about choosen iteam and print it
+    chosen_articale_details = client_socket.recv(90000).decode("utf-8")
+    print(chosen_articale_details+'\n')
+
+    return
+
+
+
+
+
+
 
 
 # Server IP address and Port number
