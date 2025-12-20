@@ -4,7 +4,7 @@
 This project is a **Client–Server application** that uses **TCP** and developed using **Python**.  
 The system allows multiple clients to connect to a server and retrieve news data from the **NewsAPI** service.
 
-The server is able to handle multiple clients at the same time using **threading**, fetches data from the NewsAPI, and sends structured JSON responses back to the clients.  
+The server is able to handle multiple clients at the same time using **Multithreading**, fetches data from the NewsAPI, and sends structured JSON responses back to the clients.  
 Each client request is also **logged and saved into a JSON file** for testing and evaluation purposes.
 
 The client provides an interactive **menu-driven interface** to the user that allows them to:
@@ -47,8 +47,7 @@ To run this project in your local host, make sure you have the following install
 
 ### Python Libraries
 Install the required dependencies using:
-
-pip install requests
+`pip install requests`
 
 ## How to Run the System
 1. open `config.py`
@@ -123,7 +122,7 @@ Object-Oriented-Programming (OOP)
 -Avoid repetition on the code
 
 ## Acknowledgments 
-It was vary useful to work in this project from  scratch and learning network programming concept under Dr. Mohd Almeer instruction and support and we extend our sincere thanks to him To teach us this course "ITNE352"
+It was vary useful to work in this project from  scratch and learning network programming concept under Dr. Mohd Almeer instruction and support, and we extend our sincere thanks to him To teach us this course "ITNE352"
    
 ## Conclusion
 In Conclusion This project demonstrates the implementation of:
