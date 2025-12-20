@@ -47,7 +47,7 @@ To run this project in your local host, make sure you have the following install
 
 ### Python Libraries
 Install the required dependencies using:
-```bash
+
 pip install requests
 
 ## How to Run the System
