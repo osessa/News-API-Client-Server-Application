@@ -1,15 +1,97 @@
 import socket
 import json
+from config import  host, port
 
 # Define the menus
 main_menu = "1) Search headliens \n2) List of sources \n3) Quit"
 search_headliens_menu = "1) Search for keywords \n2) Search by category \n3) Search by Country \n4) List all new headlines \n5) Back to the main menu"
+
 list_of_sources_menu = "1) Search by category \n2) Search by country \n3) Search by language \n4) List all \n5) Back to the main menu"
+
+#Defines the query paremeters
 categories_choices = "1) business \n2) general \n3) health \n4) science \n5) sports \n6) technology \n7) Back to menu"
-countries_choices = (
-    "1) au \n2) ca \n3) jp \n4) ae \n5) sa \n6) kr \n7) us \n8) ma \n9) Back to menu"
-)
+
+countries_choices = "1) au \n2) ca \n3) jp \n4) ae \n5) sa \n6) kr \n7) us \n8) ma \n9) Back to menu"
+
 languages_choices = "1) ar \n2) en \n3) Back to menu"
+
+#class use to creat socket , connected to server and handle it
+class NewsClientServer:
+    #constractors run when creat obj to defines main variable needed
+    def __init__(self, host=host, port=port):
+        self.SERVER_ADDR = (host, port)
+        self.client_socket = None
+
+    #function to creat client_socket and connectto the server
+    def connect(self):
+        #creat socket
+        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        #connect to server
+        self.client_socket.connect(self.SERVER_ADDR)
+
+    #function to close socket
+    def close(self):
+        if self.client_socket:
+            self.client_socket.close()
+
+    #function send json data to server 
+    def send_json(self, data: dict):
+        payload = json.dumps(data)
+        self.client_socket.sendall(payload.encode("utf-8"))
+    
+    #function recive json data from server 
+    def recv_json(self, max_bytes=90000):
+        #reciver response
+        response = self.client_socket.recv(max_bytes)
+
+        #validate response
+        if not response:
+            return None
+        
+        #decode response
+        response=response.decode("utf-8")
+
+        #validate response
+        if not response:
+            return None
+        
+        #convert response to json
+        return json.loads(response.strip())
+
+    #function recive string data from server 
+    def recv_text(self, max_bytes=90000):
+        #recive data
+        response = self.client_socket.recv(max_bytes)
+        #ensure it is not empty
+        if not response:
+            return ""
+        #decode data and return it
+        return response.decode("utf-8", errors="ignore")
+
+    #function validate if name the user chose avaliable or not
+    def validate_name(self):
+        #loop until name is validate "avaliable"
+        while True:
+            #take bane from user
+            client_name = input("Please enter your name: ").strip()
+
+            #validate it is not empty
+            if not client_name:
+                print("Name can not be empty.")
+                continue
+
+            #send the chosen name to the server to check it
+            self.client_socket.sendall(client_name.encode("utf-8"))
+
+            #recive the chosen name to the server to check it
+            response = self.client_socket.recv(1024).decode("utf-8")
+
+            #if server response yes , return vailde name
+            if response == "CLIENTNAME_OK":
+                return client_name
+            else:
+                #if server response no then let try agin
+                print("Name is taken, Try another.")
 
 
 # Validate the user choice function
@@ -35,7 +117,7 @@ def read_choice(min_val, max_val):
 
 
 # function to display the main menu for the user to chose from
-def get_menu():
+def get_menu(app: NewsClientServer):
 
     # loop to take user choice until he choices 3 to exit
     while True:
@@ -49,14 +131,14 @@ def get_menu():
         if choice == 3:
             break
         elif choice == 1:
-            get_headliens_menu()
+            get_headliens_menu(app)
         elif choice == 2:
-            get_source_menu()
+            get_source_menu(app)
     return
 
 
 # function to display the search headliens menu for the user to chose from
-def get_headliens_menu():
+def get_headliens_menu(app: NewsClientServer):
 
     # loop to take user choice until he choices 5 to return to main menu
     while True:
@@ -74,27 +156,27 @@ def get_headliens_menu():
             if not requst:
                 continue
             query = f"top-headlines?q={requst}"
-            send_to_server(query, "headlines")
+            send_to_server(app, query, "headlines")
         elif choice == 2:
             requst = get_categories_choices()
             if requst is None:
                 continue
             query = f"top-headlines?category={requst}"
-            send_to_server(query, "headlines")
+            send_to_server(app, query, "headlines")
         elif choice == 3:
             requst = get_countries_choices()
             if requst is None:
                 continue
             query = f"top-headlines?country={requst}"
-            send_to_server(query, "headlines")
+            send_to_server(app, query, "headlines")
         elif choice == 4:
             query = "top-headlines?category=general"
-            send_to_server(query, "headlines")
+            send_to_server(app, query, "headlines")
     return
 
 
 # function to display the list of sources menu  for the user to chose from
-def get_source_menu():
+def get_source_menu(app: NewsClientServer):
 
     # loop to take user choice until he choices 5 to return to main menu
     while True:
@@ -111,22 +193,22 @@ def get_source_menu():
             if requst is None:
                 continue
             query = f"sources?category={requst}"
-            send_to_server(query, "sources")
+            send_to_server(app, query, "sources")
         elif choice == 2:
             requst = get_countries_choices()
             if requst is None:
                 continue
             query = f"sources?country={requst}"
-            send_to_server(query, "sources")
+            send_to_server(app, query, "sources")
         elif choice == 3:
             requst = get_language_choices()
             if requst is None:
                 continue
             query = f"sources?language={requst}"
-            send_to_server(query, "sources")
+            send_to_server(app, query, "sources")
         elif choice == 4:
             query = f"sources"
-            send_to_server(query, "sources")
+            send_to_server(app, query, "sources")
     return
 
 
@@ -210,145 +292,73 @@ def get_countries_choices():
     return
 
 
-def send_to_server(query, type):
+def send_to_server(app: NewsClientServer, query, type):
     request_dic = {"type": type, "query": query}
-    payLoad = json.dumps(request_dic)
-    client_socket.sendall(payLoad.encode("utf-8"))
+    app.send_json(request_dic)
 
-    if type == "headlines":
-        response = client_socket.recv(90000)
+    # receive list as JSON
+    list_details = app.recv_json()
+    if list_details is None:
+        print("No results found.\n")
+        return
 
-        if not response:
-            print("No results found.\n")
-            return
+    list_details_len = len(list_details)
+    if list_details_len == 0:
+        print("No results found.\n")
+        return
 
-        list_details = response.decode("utf-8").strip()
-
-        if not list_details:
-            print("No results found.\n")
-            return
-
-        list_details = json.loads(list_details)
-
-        list_details_len = len(list_details)
-
-        count = 1
-        for articale in list_details:
-            source = articale.get("source", "N/A")
-            author = articale.get("author", "N/A")
-            title = articale.get("title", "N/A")
-
+    # print list
+    count = 1
+    for item in list_details:
+        # headlines format
+        if type == "headlines":
+            source = item.get("source", "N/A")
+            author = item.get("author", "N/A")
+            title = item.get("title", "N/A")
             print(f"{count}\nSource:{source}\nAuthor:{author}\nTitle:{title}\n")
-            count += 1
+        # sources format
+        else:
+            name = item.get("name", "N/A")
+            print(f"{count}\nSource:{name}\n")
+        count += 1
 
-        if count == 1:
-            print("No results found.\n")
-            return
+    # ask user to select item
+    print(f"Please select itam from 1 to {list_details_len}")
+    chosse = read_choice(1, list_details_len)
 
-        # ask user to select iteam for more details and validate thier choose
-        print(f"Please select itam from 1 to {list_details_len}")
-        chosse = read_choice(1, list_details_len)
+    # send chosen id
+    app.client_socket.sendall(str(chosse).encode("utf-8"))
 
-        # send id of choosen iteam
-        client_socket.sendall(str(chosse).encode("utf-8"))
-
-        # recive 'string' details about choosen iteam and print it
-        chosen_articale_details = client_socket.recv(90000).decode("utf-8")
-        print(chosen_articale_details + "\n")
-
-        return
-
-    if type == "sources":
-        response = client_socket.recv(90000)
-
-        if not response:
-            print("No results found.\n")
-            return
-
-        list_details = response.decode("utf-8").strip()
-
-        if not list_details:
-            print("No results found.\n")
-            return
-
-        list_details = json.loads(list_details)
-
-        list_details_len = len(list_details)
-
-        count = 1
-        for articale in list_details:
-            source = articale.get("name", "N/A")
-
-            print(f"{count}\nSource name:{source}\n")
-            count += 1
-
-        if count == 1:
-            print("No results found.\n")
-            return
-        # ask user to select iteam for more details and validate thier choose
-        print(f"Please select itam from 1 to {list_details_len}")
-        chosse = read_choice(1, list_details_len)
-
-        # send id of choosen iteam
-        client_socket.sendall(str(chosse).encode("utf-8"))
-
-        # recive 'string' details about choosen iteam and print it
-        chosen_articale_details = client_socket.recv(90000).decode("utf-8")
-        print(chosen_articale_details + "\n")
-
-        return
+    # receive details as text
+    chosen_details = app.recv_text()
+    print(chosen_details + "\n")
+    return
 
 
-# Server IP address and Port number
-SERVER_ADDR = ("127.0.0.1", 50555)
-
-# Create client socket ( TCP / IP) and ensure close safely by use 'with'
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
-
+if __name__ == "__main__":
+    #use class use to creat socket and connected to server
+    app = NewsClientServer(host=host, port=port)
     try:
-        # Connect to the server (start the three-way handshake)
-        client_socket.connect(SERVER_ADDR)
+        #try connect to server
+        app.connect()
 
-        # loop to validate the name
-        while True:
-            # take the name
-            client_name = input("Please enter your name: ").strip()
-            if not client_name:
-                print("Name can not be empty.")
-                continue
-
-            client_socket.sendall(client_name.encode("utf-8"))
-            response = client_socket.recv(1024).decode("utf-8")
-
-            # if name are uniqe then we can take it
-            if response == "CLIENTNAME_OK":
-                break
-            # if the client name are reserved; ask for another name
-            else:
-                print("Name is taken, Try another.")
-
-        get_menu()
-
-        # # Conver the message to bytes data
-        # # Send all the data to the server
-        # client_socket.sendall(message.encode("utf-8"))
-
-        # # Receive data from the server
-        # # Set maximum data to be reveived at once to 1024 bytes (bloking)
-        # data = client_socket.recv(1024)
-
-        # if not data:
-        #     print("[-] Server closed the connection.")
-        #     break
-
-        # # Convert the bytes data to utf-8 string
-        # # Print the received data
-        # print("Recevied:", data.decode("utf-8"))
-
-    # Handle errors
+        #take the client name ,validate it ,  send it to server
+        app.validate_name()
+        
+        #display the main menue for user to make requests 
+        get_menu(app)
+    
+    #handel any the KeyboardInterrupt mighthappen inside the try
     except KeyboardInterrupt:
         print(f"\n[!] Client exiting...")
+
+    #handle any erro happen in connection with the server
     except ConnectionResetError:
         print(f"[!] Server disconnected unexpectedly")
+
+    #handle other general errors    
     except Exception as e:
         print(f"[!] An error occurred: {e}")
+    #close the socket if user exit    
+    finally:
+        app.close()
