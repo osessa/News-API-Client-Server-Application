@@ -2,6 +2,7 @@ import socket
 import json
 from config import  host, port
 
+
 # Define the menus
 main_menu = "1) Search headliens \n2) List of sources \n3) Quit"
 search_headliens_menu = "1) Search for keywords \n2) Search by category \n3) Search by Country \n4) List all new headlines \n5) Back to the main menu"
