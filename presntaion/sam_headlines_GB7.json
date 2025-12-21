@@ -1,0 +1,268 @@
+[
+    {
+        "status": "ok",
+        "totalResults": 69,
+        "articles": [
+            {
+                "source": {
+                    "id": "ars-technica",
+                    "name": "Ars Technica"
+                },
+                "author": "Kyle Orland",
+                "title": "Switch 2 pub backs off Game Key Cards after leaking lower-cost cartridge options - Ars Technica",
+                "description": "Inin suggests new low-cost options allowed it to “recalculate production” for full cartridge.",
+                "url": "https://arstechnica.com/gaming/2025/12/cheaper-lower-capacity-switch-2-cartridges-could-mean-fewer-game-key-cards/",
+                "urlToImage": "https://cdn.arstechnica.net/wp-content/uploads/2025/12/switch2gkc-1152x648-1766176952.png",
+                "publishedAt": "2025-12-19T21:30:08Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": "ars-technica",
+                    "name": "Ars Technica"
+                },
+                "author": "Andrew Cunningham",
+                "title": "Riot Games is making an anti-cheat change that could be rough on older PCs - Ars Technica",
+                "description": "BIOS checks will only affect a limited subset of Valorant players for now.",
+                "url": "https://arstechnica.com/gadgets/2025/12/some-valorant-players-need-to-update-their-pc-bios-to-keep-anti-cheat-software-happy/",
+                "urlToImage": "https://cdn.arstechnica.net/wp-content/uploads/2025/12/riot-valorant-vanguard-1152x648-1766172890.jpg",
+                "publishedAt": "2025-12-19T20:27:36Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "9to5google.com"
+                },
+                "author": "Abner Li",
+                "title": "Gemini will replace Google Assistant on Android in 2026 - 9to5Google",
+                "description": "Back in March, Google said Gemini would replace Assistant on Android phones this year. That “upgrade” is now set for 2026.",
+                "url": "http://9to5google.com/2025/12/19/google-assistant-gemini-2026/",
+                "urlToImage": "https://i0.wp.com/9to5google.com/wp-content/uploads/sites/4/2022/12/Google-Assistant.jpg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+                "publishedAt": "2025-12-19T18:55:00Z",
+                "content": "Back in March, Google said Gemini would replace Assistant on Android phones this year. That upgrade is now set for 2026.\r\nGoogle today shared an update on its plan to upgrade the Assistant experience… [+1307 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "9to5Mac"
+                },
+                "author": "Fernando Silva",
+                "title": "iMessage is full of features you’re probably not using (but should) [Video] - 9to5Mac",
+                "description": "Discover iMessage features you probably aren’t using, from scheduling texts to Check In, audio transcriptions, and pinned conversations.",
+                "url": "https://9to5mac.com/2025/12/19/imessage-is-full-of-features-youre-probably-not-using-but-should-video/",
+                "urlToImage": "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2025/12/fernando.jpeg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+                "publishedAt": "2025-12-19T18:00:00Z",
+                "content": "It feels like every year, Apple quietly adds dozens of small features and improvements to the Messages app, but most of them fly under the radar. These aren’t flashy or eye-grabbing features, but the… [+5276 chars]"
+            },
+            {
+                "source": {
+                    "id": "ars-technica",
+                    "name": "Ars Technica"
+                },
+                "author": "Ars Staff",
+                "title": "Strava puts popular “Year in Sport” recap behind an $80 paywall - Ars Technica",
+                "description": "Strava’s most viral feature is suddenly locked away.",
+                "url": "https://arstechnica.com/culture/2025/12/strava-puts-popular-year-in-sport-recap-behind-an-80-paywall/",
+                "urlToImage": "https://cdn.arstechnica.net/wp-content/uploads/2025/12/GettyImages-2193480664-1152x648.jpg",
+                "publishedAt": "2025-12-19T17:43:30Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": "ars-technica",
+                    "name": "Ars Technica"
+                },
+                "author": "Kyle Orland",
+                "title": "We asked four AI coding agents to rebuild Minesweeper —the results were explosive - Ars Technica",
+                "description": "How do four modern LLMs do at re-creating a simple Windows gaming classic?",
+                "url": "https://arstechnica.com/ai/2025/12/the-ars-technica-ai-coding-agent-test-minesweeper-edition/",
+                "urlToImage": "https://cdn.arstechnica.net/wp-content/uploads/2025/12/ai-gpu-minsweeper-1152x648.jpg",
+                "publishedAt": "2025-12-19T17:29:40Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": "mashable",
+                    "name": "Mashable"
+                },
+                "author": "Tim Marcin",
+                "title": "ChatGPT launches Apps beta: 8 big apps you can try right away - Mashable",
+                "description": "Is this the start of an eventual competitor to the Google and Apple app stores?",
+                "url": "https://mashable.com/article/chatgpt-apps-beta-apps-to-try",
+                "urlToImage": "https://helios-i.mashable.com/imagery/articles/01Tc7kOybAWcE3ovKlhxXKn/hero-image.fill.size_1200x675.v1766090610.jpg",
+                "publishedAt": "2025-12-19T17:03:45Z",
+                "content": null
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "2k.com"
+                },
+                "author": null,
+                "title": "Free goodies for the 12 Days of Mercenary Day! - Borderlands | Official Website",
+                "description": "Celebrate the season with a series of festive Borderlands 4 freebies on our social channels!",
+                "url": "https://borderlands.2k.com/borderlands-4/news/12-days-of-mercenary-day/",
+                "urlToImage": "https://assets.2k.com/1a6ngf98576c/4zXpfbA9xO397sI262TrDm/6bbefd7d76850e74bcfda880dd76cf10/BL4_KA.png",
+                "publishedAt": "2025-12-19T17:02:20Z",
+                "content": "Mercenary Day came early this year when we dropped Bounty Pack 1: How Rush Saved Mercenary Day\r\n as a free gift for all Borderlands 4 players* in November. But we've still got more holiday merriment … [+2060 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Pinkbike.com"
+                },
+                "author": "Matt Beer",
+                "title": "Mountain Bike of the Year Nominees - Pinkbike",
+                "description": "This year's contenders include everything from a World Cup winning DH machine to a fast and friendly trail bike.",
+                "url": "https://www.pinkbike.com/news/2025-pinkbike-awards-mountain-bike-of-the-year-nominees.html",
+                "urlToImage": "https://ep1.pinkbike.org/p4pb29138562/p4pb29138562.jpg",
+                "publishedAt": "2025-12-19T17:00:00Z",
+                "content": "This is the big one: Bike of the Year. Its always a hard-fought battle as bikes from all disciplines enter the ring for the title. When we recalled our favorite bikes in 2025, none of them used super… [+9498 chars]"
+            },
+            {
+                "source": {
+                    "id": "techcrunch",
+                    "name": "TechCrunch"
+                },
+                "author": "Sarah Perez",
+                "title": "Netflix acquires gaming avatar maker Ready Player Me - TechCrunch",
+                "description": "The gaming startup will allow Netflix subscribers to create avatars that can extend across gaming titles.",
+                "url": "https://techcrunch.com/2025/12/19/netflix-acquires-gaming-avatar-maker-ready-player-me/",
+                "urlToImage": "https://techcrunch.com/wp-content/uploads/2025/12/imgi_11_asset_morphing.webp?w=747",
+                "publishedAt": "2025-12-19T17:00:00Z",
+                "content": "After shifting its gaming strategy to focus more on games played on the TV, Netflix announced it’s acquiring Ready Player Me, an avatar-creation platform based in Estonia. The streamer said Friday it… [+4187 chars]"
+            },
+            {
+                "source": {
+                    "id": "bloomberg",
+                    "name": "Bloomberg"
+                },
+                "author": "Jason Schreier",
+                "title": "Blizzard President Talks Culture, Bonuses and Releasing More Games - Bloomberg.com",
+                "description": "Johanna Faries, who took over as president of Blizzard in 2024, reveals what’s coming from the storied studio",
+                "url": "https://www.bloomberg.com/news/newsletters/2025-12-19/blizzard-president-johanna-faries-on-culture-bonuses-and-releasing-more-games",
+                "urlToImage": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iJ4oKPD.8xt0/v0/1200x675.jpg",
+                "publishedAt": "2025-12-19T16:34:35Z",
+                "content": "Hi everyone. Today were talking to the president of Blizzard Entertainment, but first...\r\nThis weeks top gaming news:"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "9to5google.com"
+                },
+                "author": "Will Sattelberg",
+                "title": "YouTube Shorts is testing a new location and fresh phrasing for its Dislike button - 9to5Google",
+                "description": "Google is testing out new ways to improve dislikes on YouTube Shorts, and it could come with hiding the button in a new menu.",
+                "url": "http://9to5google.com/2025/12/19/youtube-shorts-testing-new-location-fresh-phrasing-dislike-button/",
+                "urlToImage": "https://i0.wp.com/9to5google.com/wp-content/uploads/sites/4/2023/03/youtube-shorts-logo-circle-3.jpg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+                "publishedAt": "2025-12-19T16:33:00Z",
+                "content": "If you’ve noticed the dislike button missing from YouTube Shorts lately, you aren’t alone. Google is trying out some changes for how dislikes work on the platform, and it could make it easier to sign… [+1536 chars]"
+            },
+            {
+                "source": {
+                    "id": "the-verge",
+                    "name": "The Verge"
+                },
+                "author": "Dominic Preston",
+                "title": "Who owns Trump Mobile? - The Verge",
+                "description": "Which part of the Trump empire owns Trump Mobile, and how does a former FBI agent in Florida fit in?",
+                "url": "https://www.theverge.com/tech/848029/trump-mobile-ownership-structure-licensing",
+                "urlToImage": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/11/Vrg_illo_trump_phone_np.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+                "publishedAt": "2025-12-19T16:20:27Z",
+                "content": "<ul><li></li><li></li><li></li></ul>\r\nAnd do they now do nuclear fusion too?\r\nAnd do they now do nuclear fusion too?\r\nby\r\nDominic PrestonClose\r\nDominic Preston\r\nPosts from this author will be added t… [+7788 chars]"
+            },
+            {
+                "source": {
+                    "id": "ign",
+                    "name": "IGN"
+                },
+                "author": "Robert Anderson",
+                "title": "Call of Duty: Black Ops 7 Is Already Half Price at Best Buy, Barely a Month After Release - IGN",
+                "description": "Call of Duty Black Ops 7 is already seeing steep discounts, barely a month after release, dropping to $35 at Best Buy, and $40 everywhere else.",
+                "url": "https://www.ign.com/articles/call-of-duty-black-ops-7-is-already-half-price-at-most-retailers-barely-a-month-after-release",
+                "urlToImage": "https://assets-prd.ignimgs.com/2025/12/04/season1thumb-1764861387266.png?width=1280&format=jpg&auto=webp&quality=80",
+                "publishedAt": "2025-12-19T15:42:46Z",
+                "content": "Call of Duty: Black Ops 7 launched last month to become the best-selling game of November in the U.S. by dollar sales. That's a pretty good showing, right? So what's up, and why is one of the best-se… [+1321 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "Gameinformer.com"
+                },
+                "author": "Wesley LeBlanc",
+                "title": "Clair Obscur: Expedition 33 Wins Another Game Of The Year At The Indie Game Awards - Game Informer",
+                "description": "For those who come after.",
+                "url": "https://gameinformer.com/round-up/2025/12/19/clair-obscur-expedition-33-wins-another-game-of-the-year-at-the-indie-game",
+                "urlToImage": "https://gameinformer.com/sites/default/files/styles/thumbnail/public/2025/04/22/c67da914/ss_9e050e6a61a4d9f4fe54bc62c8c73da38e9a63b0.jpg.webp",
+                "publishedAt": "2025-12-19T15:30:30Z",
+                "content": "The incredible team over at Six One Indie held its inaugural awards-only ceremony, The Indie Game Awards, last year, and the team returned to do the same last night! Game Informer was on the jury for… [+5206 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "How-To Geek"
+                },
+                "author": "Sydney Butler",
+                "title": "Please stop using Cat5 cables (do this instead) - How-To Geek",
+                "description": "Is your network slower than a snail? The culprit might be hiding in plain sight...",
+                "url": "https://www.howtogeek.com/are-you-using-the-wrong-ethernet-cable-heres-how-to-tell/",
+                "urlToImage": "https://static0.howtogeekimages.com/wordpress/wp-content/uploads/wm/2025/06/a7308302.jpg?w=1600&h=900&fit=crop",
+                "publishedAt": "2025-12-19T15:15:00Z",
+                "content": "Ethernet has been around for a long time. Invented in the '70s, commercialized in the early '80s, and it's still the fastest and most reliable network technology you can have in your home.\r\nThe probl… [+4612 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "9to5google.com"
+                },
+                "author": "Ben Schoon",
+                "title": "UGreen’s Qi2 25W wireless charger is a perfectly portable Pixel 10 travel dock [Gallery] - 9to5Google",
+                "description": "There are literally countless Qi2 charging docks available for the Pixel 10 series, each one with a different type of...",
+                "url": "http://9to5google.com/2025/12/19/ugreen-qi2-25w-charger-google-pixel-10-review/",
+                "urlToImage": "https://i0.wp.com/9to5google.com/wp-content/uploads/sites/4/2025/12/ugreen-magflow-qi2-pixel-10-1.jpg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+                "publishedAt": "2025-12-19T15:05:00Z",
+                "content": "There are literally countless Qi2 charging docks available for the Pixel 10 series, each one with a different type of use case. One that I’ve been testing out lately is from UGreen, with the company’… [+2243 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "GQ Magazine"
+                },
+                "author": "Dean Stattmann",
+                "title": "How to Get Lean - GQ",
+                "description": "Looking to tone up your physique for next year? Here’s the healthy, expert-approved way to do it—once and for all",
+                "url": "https://www.gq.com/story/how-to-get-lean",
+                "urlToImage": "https://media.gq.com/photos/694431af5900ae9ac3a8f509/16:9/w_1280,c_limit/get%20lean%202.jpg",
+                "publishedAt": "2025-12-19T14:00:00Z",
+                "content": "Getting lean is one of those fitness-isms that doesnt actually mean anythinglike toning, or nourishment. It sort of vaguely means getting in better physical shape. And if you had to put a finer point… [+2088 chars]"
+            },
+            {
+                "source": {
+                    "id": null,
+                    "name": "9to5Mac"
+                },
+                "author": "Chance Miller",
+                "title": "Apple might be requiring iPhone users to install iOS 26 for security fixes - 9to5Mac",
+                "description": "Apple released iOS 26.2 last week with important security fixes. At the same time, it also shipped iOS 18.7.3 for...",
+                "url": "https://9to5mac.com/2025/12/19/ios-26-2-iios-18-7-3-update-options-security/",
+                "urlToImage": "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2025/12/ios-26-2-settings.jpg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+                "publishedAt": "2025-12-19T13:35:00Z",
+                "content": "Apple released iOS 26.2 last week with important security fixes. At the same time, it also shipped iOS 18.7.3 for users who havent upgraded yet at least in theory.\r\nIn practice, Jason Snell at Six Co… [+3043 chars]"
+            },
+            {
+                "source": {
+                    "id": "the-verge",
+                    "name": "The Verge"
+                },
+                "author": "Allison Johnson",
+                "title": "Phones were fashionable again in 2025 - The Verge",
+                "description": "From the wooden-back Motorola Razr Ultra to the iPhone 17 Pro’s vibrant turn in Cosmic Orange, phones made more fashion statements than usual in 2025.",
+                "url": "https://www.theverge.com/tech/842190/2025-smartphones-design-color-fashion",
+                "urlToImage": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/12/258090_EOY_2025_CVirginia_PHONES.jpg?quality=90&strip=all&crop=0%2C10.732984293194%2C100%2C78.534031413613&w=1200",
+                "publishedAt": "2025-12-19T13:30:00Z",
+                "content": "<ul><li></li><li></li><li></li></ul>\r\nBye-bye, boring black rectangles.\r\nBye-bye, boring black rectangles.\r\nby\r\nAllison JohnsonClose\r\nAllison Johnson\r\nPosts from this author will be added to your dai… [+5231 chars]"
+            }
+        ]
+    }
+]
