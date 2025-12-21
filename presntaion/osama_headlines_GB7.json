@@ -1,0 +1,86 @@
+[
+    {
+        "status": "ok",
+        "totalResults": 7,
+        "articles": [
+            {
+                "source": {
+                    "id": "bbc-sport",
+                    "name": "BBC Sport"
+                },
+                "author": null,
+                "title": "Afcon 2025: Can Morocco seal African dominance on home soil?",
+                "description": "Morocco has spent more than a decade reshaping its football, but will hosting Afcon 2025 allow the country to end a 50-year wait for the trophy?",
+                "url": "http://www.bbc.co.uk/sport/football/articles/czj092k4zjgo",
+                "urlToImage": "https://ichef.bbci.co.uk/ace/branded_sport/1200/cpsprodpb/f40a/live/4da31960-dcf8-11f0-b67b-690eb873de1b.jpg",
+                "publishedAt": "2025-12-19T17:22:17.789577Z",
+                "content": "To get this far, Morocco has invested heavily, especially in football infrastructure, including two of Africa's most advanced facilities - both of which bear King Mohammed's name.\r\nTogether, the Moha… [+2519 chars]"
+            },
+            {
+                "source": {
+                    "id": "google-news-uk",
+                    "name": "Google News (UK)"
+                },
+                "author": null,
+                "title": "Ukraine attacks Russian ‘shadow’ tanker off Libyan coast - The Guardian",
+                "description": "<ol><li>Ukraine attacks Russian ‘shadow’ tanker off Libyan coast  The Guardian\r\n</li><li>Ukraine video claims to show long-range attack on oil tanker in Mediterranean  BBC\r\n</li><li>Ukraine-Russia war latest: Kyiv blows up Russian oil tanker in Mediterranean …",
+                "url": "https://access.workspace.google.com/remediate",
+                "urlToImage": null,
+                "publishedAt": "2025-12-19T13:11:00+00:00",
+                "content": "<ol><li>Ukraine attacks Russian ‘shadow’ tanker off Libyan coast  The Guardian\r\n</li><li>Ukraine video claims to show long-range attack on oil tanker in Mediterranean  BBC\r\n</li><li>Ukraine-Russia wa… [+257 chars]"
+            },
+            {
+                "source": {
+                    "id": "medical-news-today",
+                    "name": "Medical News Today"
+                },
+                "author": "Corrie Pelc",
+                "title": "Polyphenol-rich cocoa, coffee, and berries may help support heart health",
+                "description": "Researchers found that consuming foods rich in polyphenols — such as coffee, berries, cocoa, and olive oil — may help improve heart health long-term.",
+                "url": "https://www.medicalnewstoday.com/articles/polyphenol-rich-foods-cocoa-coffee-berries-olive-oil-support-heart-health",
+                "urlToImage": "https://media.post.rvohealth.io/wp-content/uploads/sites/3/2025/12/berries-baskets-1200-628-facebook.jpg",
+                "publishedAt": "2025-12-15T18:15:49Z",
+                "content": "<ul><li>There are several factors that play a role in keeping your heart healthy, such as the food you eat. </li><li>Past studies have shown that foods rich in certain nutrients can offer heart healt… [+7266 chars]"
+            },
+            {
+                "source": {
+                    "id": "techcrunch",
+                    "name": "TechCrunch"
+                },
+                "author": "Tim De Chant",
+                "title": "Mycocycle uses mushrooms to upcycle old tires and construction waste | TechCrunch",
+                "description": "The startup's fungi use their mycelium to consume oil-based rubbers and plastics, creating new bio-based materials in the process.",
+                "url": "https://techcrunch.com/2024/05/08/mycocycle-uses-mushrooms-to-upcycle-old-tires-and-construction-waste/",
+                "urlToImage": "https://techcrunch.com/wp-content/uploads/2024/05/GettyImages-1350655821.jpeg?resize=1200,796",
+                "publishedAt": "2024-05-07T18:07:09Z",
+                "content": "Usually, when something starts to rot, it gets pitched in the trash. But Joanne Rodriguez wants to turn the concept of rot on its head by growing fungus on trash to turn it into something better.\r\nWe… [+4229 chars]"
+            },
+            {
+                "source": {
+                    "id": "lequipe",
+                    "name": "L'equipe"
+                },
+                "author": "L'EQUIPE",
+                "title": "Manchester City au complet pour la finale de la Ligue des champions",
+                "description": "Manchester City a dévoilé un groupe de vingt-trois joueurs pour la finale de Ligue des champions samedi contre l'Inter Milan, à Istanbul (21 heures).",
+                "url": "https://www.lequipe.fr/Football/Actualites/Manchester-city-au-complet-pour-la-finale-de-la-ligue-des-champions/1401522",
+                "urlToImage": "https://medias.lequipe.fr/img-photo-jpg/kyle-walker-est-present-dans-le-groupe-de-manchester-city-presse-sports/1500000001796010/0:0,1995:1330-640-427-75/57f76.jpg",
+                "publishedAt": "2023-06-08T14:46:51+00:00",
+                "content": "L'entraîneur de Manchester City Pep Guardiola devrait pouvoir compter sur toutes ses forces vives pour la finale de la Ligue des champions samedi à Istanbul, contre l'Inter Milan (21 heures). Le club… [+235 chars]"
+            },
+            {
+                "source": {
+                    "id": "new-scientist",
+                    "name": "New Scientist"
+                },
+                "author": null,
+                "title": "Adding wild fungi to soil could make trees store more carbon",
+                "description": "A loblolly pine plantation in the state of Georgia is the test site for a start-up company trying to see if improving the fungi and other microbes in soil can help trees grow bigger and faster",
+                "url": "https://www.newscientist.com/article/2361604-adding-wild-fungi-to-soil-could-make-trees-store-more-carbon/",
+                "urlToImage": "https://images.newscientist.com/wp-content/uploads/2023/02/28175105/SEI_146112168.jpg",
+                "publishedAt": "2023-03-01T00:00:00Z",
+                "content": "By James Dinneen\r\nMycorrhizal fungi colonising a host plant’s root tissues\r\nEmmanuel Lattes//Alamy\r\nA start-up has begun planting fungi and other microbes in soil collected from intact forests at a t… [+417 chars]"
+            }
+        ]
+    }
+]
