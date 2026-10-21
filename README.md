@@ -24,8 +24,8 @@ First Semester – Academic Year 2025/2026
 - **Group Name:** GB7  
 - **Course Code:** ITNE352 – Network Programming  
 - **Section:** 2  
-- **Student Name:** Osama essa , Sara Ismail  
-- **Student ID:** *202305787* , *202306311*
+- **Student Name:** Osama essa 
+- **Student ID:** *202305787* 
 
 ---
 
